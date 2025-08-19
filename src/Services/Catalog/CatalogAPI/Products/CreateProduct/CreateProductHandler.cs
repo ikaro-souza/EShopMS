@@ -1,6 +1,3 @@
-using CatalogAPI.Models;
-using MediatR;
-
 namespace CatalogAPI.Products.CreateProduct;
 
 public record CreateProductCommand(
@@ -13,7 +10,8 @@ public record CreateProductCommand(
 
 public record CreateProductResult(Guid Id);
 
-internal class CreateProductHandler : IRequestHandler<CreateProductCommand, CreateProductResult>
+internal class CreateProductHandler(IDocumentSession documentSession)
+    : IRequestHandler<CreateProductCommand, CreateProductResult>
 {
     public async Task<CreateProductResult> Handle(CreateProductCommand request, CancellationToken cancellationToken)
     {
@@ -27,7 +25,9 @@ internal class CreateProductHandler : IRequestHandler<CreateProductCommand, Crea
         };
 
         // save to database
+        documentSession.Store(product);
+        await documentSession.SaveChangesAsync(cancellationToken);
 
-        return new CreateProductResult(Guid.NewGuid());
+        return new CreateProductResult(product.Id);
     }
 }
