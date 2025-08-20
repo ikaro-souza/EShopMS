@@ -4,3 +4,4 @@ global using MediatR;
 global using CatalogAPI.Models;
 global using Marten;
 global using BuildingBlocks.CQRS;
+global using CatalogAPI.Exceptions;
