@@ -39,7 +39,6 @@ internal class CreateProductHandler(IDocumentSession documentSession, IValidator
             Price = request.Price
         };
 
-        // save to database
         documentSession.Store(product);
         await documentSession.SaveChangesAsync(cancellationToken);
 

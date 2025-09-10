@@ -37,11 +37,7 @@ internal class UpdateProductCommandHandler(
         if (errors.Count != 0) throw new ValidationException(errors.FirstOrDefault());
 
         var product = await documentSession.LoadAsync<Product>(command.Id, cancellationToken);
-        if (product is null)
-        {
-            logger.LogWarning("Product with ID {ProductId} not found", command.Id);
-            throw new ProductNotFoundException(command.Id);
-        }
+        if (product is null) throw new ProductNotFoundException(command.Id);
 
         product.Name = command.Name;
         product.Category = command.Category;
