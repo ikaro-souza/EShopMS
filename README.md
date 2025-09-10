@@ -9,3 +9,10 @@ Tech and techniques used:
 - [Carter](https://github.com/CarterCommunity/Carter): Minimal API setup
 - [Mapster](https://github.com/MapsterMapper/Mapster): Object mapper
 - [FluentValidation](https://docs.fluentvalidation.net/en/latest): Object validation
+
+
+
+## MediatR and the Mediator Pattern
+The Mediator Pattern decouples components by providing a common interface they can communicate through, instead of directly communicating with one another.
+This pattern exemplifies the Dependency Inversion principle, because components depend on the mediator interface (an abstraction) rather than directly on each other, applying DIP even between peers.
+
