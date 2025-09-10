@@ -40,7 +40,7 @@ internal class UpdateProductCommandHandler(
         if (product is null)
         {
             logger.LogWarning("Product with ID {ProductId} not found", command.Id);
-            throw new ProductNotFoundException();
+            throw new ProductNotFoundException(command.Id);
         }
 
         product.Name = command.Name;

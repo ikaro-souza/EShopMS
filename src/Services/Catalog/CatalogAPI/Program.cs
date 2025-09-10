@@ -14,9 +14,13 @@ builder.Services.AddMarten(config => { config.Connection(builder.Configuration.G
     .UseLightweightSessions();
 builder.Services.AddValidatorsFromAssembly(assembly);
 
+builder.Services.AddExceptionHandler<CustomExceptionHandler>();
+
 var app = builder.Build();
 
 // Configure HTTP endpoints
 app.MapCarter();
+
+app.UseExceptionHandler(options => { });
 
 app.Run();

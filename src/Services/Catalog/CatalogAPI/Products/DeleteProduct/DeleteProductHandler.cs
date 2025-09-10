@@ -30,7 +30,7 @@ internal class DeleteProductCommandHandler(
         if (product is null)
         {
             logger.LogWarning("Product with ID {ProductId} not found", command.ProductId);
-            throw new ProductNotFoundException();
+            throw new ProductNotFoundException(command.ProductId);
         }
 
         documentSession.Delete(product);
