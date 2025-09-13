@@ -1,7 +1,7 @@
 # EShopMS
 
 Tech and techniques used:
-- [Postgres | Martem](https://martendb.io/introduction.html): Transforms Postgres into transactional document database
+- [Postgres | Marten](https://martendb.io/introduction.html): Transforms Postgres into transactional document database
 - [Vertical Slice Architecture](https://www.milanjovanovic.tech/blog/vertical-slice-architecture)
 - [CQRS Pattern](https://learn.microsoft.com/en-us/azure/architecture/patterns/cqrs)
 - [Mediator Pattern](https://refactoring.guru/design-patterns/mediator)
