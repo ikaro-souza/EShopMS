@@ -1,5 +1,39 @@
 # This is a generated file. Not intended for manual editing.
 services:
+  basket-api:
+    build:
+      context: "/home/ikaro-lisarb/Desktop/projects/ms-course/EshopMS/src"
+      dockerfile: "Services/Basket/Basket.API/Dockerfile"
+      target: "base"
+      args:
+        BUILD_CONFIGURATION: "Debug"
+    command: []
+    entrypoint:
+    - "/opt/JetBrains/RiderDebuggerTools/linux-x64/JetBrains.Debugger.Worker"
+    - "--runtimeconfig"
+    - "/opt/JetBrains/RiderDebuggerTools/JetBrains.Debugger.Worker.runtimeconfig.json"
+    - "--mode=server"
+    - "--frontend-port=57000"
+    - "--backend-port=57200"
+    - "--roslyn-worker-port=57420"
+    - "--timeout=60"
+    environment:
+      DOTNET_USE_POLLING_FILE_WATCHER: "true"
+      RIDER_DEBUGGER_LOG_DIR: "/var/opt/JetBrains/RiderDebuggerTools"
+      RESHARPER_LOG_CONF: "/etc/opt/JetBrains/RiderDebuggerTools/backend-log.xml"
+    image: "basket-api:dev"
+    ports:
+    - "127.0.0.1:57020:57000"
+    - "127.0.0.1:57220:57200"
+    - "127.0.0.1:57420:57420"
+    volumes:
+    - "/home/ikaro-lisarb/Desktop/projects/ms-course/EshopMS/src/Services/Basket/Basket.API:/app:rw"
+    - "/home/ikaro-lisarb/Desktop/projects/ms-course/EshopMS/src:/src:rw"
+    - "/home/ikaro-lisarb/.nuget/packages:/home/app/.nuget/packages"
+    - "/home/ikaro-lisarb/.local/share/JetBrains/RiderRemoteDebugger/2025.2.1/Linux64:/opt/JetBrains/RiderDebuggerTools"
+    - "/snap/rider/628/bin/backend-log.xml:/etc/opt/JetBrains/RiderDebuggerTools/backend-log.xml"
+    - "/home/ikaro-lisarb/.cache/JetBrains/Rider2025.2/log/DebuggerWorker/JetBrains.Debugger.Worker.2025_9_14_02_10_58:/var/opt/JetBrains/RiderDebuggerTools:rw"
+    working_dir: "/app"
   catalog-api:
     build:
       context: "/home/ikaro-lisarb/Desktop/projects/ms-course/EshopMS/src"
@@ -15,7 +49,7 @@ services:
     - "--mode=server"
     - "--frontend-port=57000"
     - "--backend-port=57200"
-    - "--roslyn-worker-port=57415"
+    - "--roslyn-worker-port=57421"
     - "--timeout=60"
     environment:
       DOTNET_USE_POLLING_FILE_WATCHER: "true"
@@ -23,14 +57,14 @@ services:
       RESHARPER_LOG_CONF: "/etc/opt/JetBrains/RiderDebuggerTools/backend-log.xml"
     image: "catalogapi:dev"
     ports:
-    - "127.0.0.1:57015:57000"
-    - "127.0.0.1:57215:57200"
-    - "127.0.0.1:57415:57415"
+    - "127.0.0.1:57021:57000"
+    - "127.0.0.1:57221:57200"
+    - "127.0.0.1:57421:57421"
     volumes:
     - "/home/ikaro-lisarb/Desktop/projects/ms-course/EshopMS/src/Services/Catalog/CatalogAPI:/app:rw"
     - "/home/ikaro-lisarb/Desktop/projects/ms-course/EshopMS/src:/src:rw"
     - "/home/ikaro-lisarb/.nuget/packages:/home/app/.nuget/packages"
     - "/home/ikaro-lisarb/.local/share/JetBrains/RiderRemoteDebugger/2025.2.1/Linux64:/opt/JetBrains/RiderDebuggerTools"
     - "/snap/rider/628/bin/backend-log.xml:/etc/opt/JetBrains/RiderDebuggerTools/backend-log.xml"
-    - "/home/ikaro-lisarb/.cache/JetBrains/Rider2025.2/log/DebuggerWorker/JetBrains.Debugger.Worker.2025_9_14_01_50_37:/var/opt/JetBrains/RiderDebuggerTools:rw"
+    - "/home/ikaro-lisarb/.cache/JetBrains/Rider2025.2/log/DebuggerWorker/JetBrains.Debugger.Worker.2025_9_14_02_10_58:/var/opt/JetBrains/RiderDebuggerTools:rw"
     working_dir: "/app"

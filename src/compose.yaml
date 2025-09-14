@@ -31,6 +31,8 @@
     restart: always
     ports:
       - "6379:6379"
+    volumes:
+      - redis-data:/data
   
   catalog-api:
     container_name: catalog-api
@@ -45,8 +47,25 @@
       - "6000:8080"
     depends_on:
       - catalog-db
+  
+  basket-api:
+    image: basket-api
+    container_name: basket-api
+    build:
+      context: .
+      dockerfile: Services/Basket/Basket.API/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ConnectionStrings__Database=Host=basket-db;Port=5432;Database=BasketDb;Username=postgres;Password=postgres
+      - ConnectionStrings__Redis=distributed-cache:6379
+    ports:
+      - "6001:8080"
+    depends_on:
+      - basket-db
+      - distributed-cache
 
 volumes:
   catalog-db-data:
   basket-db-data:
-    
+  redis-data:
