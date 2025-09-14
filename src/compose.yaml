@@ -65,6 +65,7 @@
     depends_on:
       - basket-db
       - distributed-cache
+      - discount-grpc
   
   discount-grpc:
     image: discount-grpc
