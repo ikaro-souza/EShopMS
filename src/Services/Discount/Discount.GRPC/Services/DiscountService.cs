@@ -52,9 +52,24 @@ public class DiscountService(DiscountContext dbContext, ILogger<DiscountService>
         return coupon.Adapt<CouponModel>();
     }
 
-    public override Task<DeleteDiscountResponse> DeleteDiscount(DeleteDiscountRequest request,
+    public override async Task<DeleteDiscountResponse> DeleteDiscount(DeleteDiscountRequest request,
         ServerCallContext context)
     {
-        return base.DeleteDiscount(request, context);
+        var coupon = await dbContext.Coupons.FirstOrDefaultAsync(x => x.ProductName == request.ProductName);
+        if (coupon is null)
+        {
+            logger.LogInformation("Discount with ProductName={ProductName} not found", request.ProductName);
+            return new DeleteDiscountResponse { Success = false };
+        }
+
+        dbContext.Coupons.Remove(coupon);
+        var success = await dbContext.SaveChangesAsync() > 0;
+
+        if (success)
+            logger.LogInformation("Discount with ProductName={ProductName} successfully deleted", request.ProductName);
+        else
+            logger.LogError("Error deleting discount with ProductName={ProductName}", request.ProductName);
+
+        return new DeleteDiscountResponse { Success = success };
     }
 }
