@@ -64,8 +64,26 @@
     depends_on:
       - basket-db
       - distributed-cache
+  
+  discount-grpc:
+    image: discount.grpc
+    container_name: discount-grpc
+    build:
+      context: .
+      dockerfile: Services/Discount/Discount.GRPC/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ConnectionStrings__Database=Data Source=/app/discount-db
+    ports:
+      - "6002:8080"
+    volumes:
+      - discount-db-data:/app
 
 volumes:
   catalog-db-data:
   basket-db-data:
   redis-data:
+  discount-db-data:
+  
+
