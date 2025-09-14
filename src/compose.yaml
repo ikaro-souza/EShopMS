@@ -76,7 +76,7 @@
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=8080
-      - ConnectionStrings__Database=Data Source=/app/discount-db
+      - ConnectionStrings__Database=Data Source=/app/discount-db.sqlite
     ports:
       - "6002:8080"
     volumes:
