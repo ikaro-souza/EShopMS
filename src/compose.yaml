@@ -25,6 +25,13 @@
     volumes:
       - basket-db-data:/var/lib/postgresql/data
   
+  distributed-cache:
+    image: redis
+    container_name: distributed-cache
+    restart: always
+    ports:
+      - "6379:6379"
+  
   catalog-api:
     container_name: catalog-api
     build:

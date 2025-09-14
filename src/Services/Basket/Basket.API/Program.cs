@@ -27,7 +27,15 @@ builder.Services.AddMarten(config =>
 builder.Services.AddHealthChecks()
     .AddNpgSql(connectionString);
 
+builder.Services.AddStackExchangeRedisCache(config =>
+{
+    config.Configuration = builder.Configuration.GetConnectionString("Redis")!;
+    config.InstanceName = "Basket";
+});
+
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
+builder.Services.Decorate<IBasketRepository, CachedBasketRepository>();
+
 
 var app = builder.Build();
 
