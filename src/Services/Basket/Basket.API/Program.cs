@@ -30,7 +30,7 @@ builder.Services.AddHealthChecks()
 builder.Services.AddStackExchangeRedisCache(config =>
 {
     config.Configuration = builder.Configuration.GetConnectionString("Redis")!;
-    config.InstanceName = "Basket";
+    config.InstanceName = "Basket_";
 });
 
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
