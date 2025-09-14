@@ -13,10 +13,14 @@ builder.Services.AddMediatR(config =>
     config.AddOpenBehavior(typeof(LoggingBehavior<,>));
 });
 
-// var connectionString = builder.Configuration.GetConnectionString("Database")!;
-// builder.Services.AddMarten(config => { config.Connection(connectionString); })
-//     .UseLightweightSessions();
-//
+var connectionString = builder.Configuration.GetConnectionString("Database")!;
+builder.Services.AddMarten(config =>
+    {
+        config.Connection(connectionString);
+        config.Schema.For<ShoppingCart>().Identity(x => x.UserName);
+    })
+    .UseLightweightSessions();
+
 // builder.Services.AddHealthChecks()
 //     .AddNpgSql(connectionString);
 

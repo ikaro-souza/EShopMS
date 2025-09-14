@@ -13,7 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingBlocks", "BuildingB
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AA0D5302-90B4-44EA-8D9B-5FA8319C6E57}"
 	ProjectSection(SolutionItems) = preProject
-		docker-compose.yml = docker-compose.yml
 		compose.yaml = compose.yaml
 	EndProjectSection
 EndProject
