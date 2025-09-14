@@ -59,6 +59,7 @@
       - ASPNETCORE_HTTP_PORTS=8080
       - ConnectionStrings__Database=Host=basket-db;Port=5432;Database=BasketDb;Username=postgres;Password=postgres
       - ConnectionStrings__Redis=distributed-cache:6379
+      - GRPC__DiscountUrl=http://discount-grpc:8080
     ports:
       - "6001:8080"
     depends_on:
@@ -66,7 +67,7 @@
       - distributed-cache
   
   discount-grpc:
-    image: discount.grpc
+    image: discount-grpc
     container_name: discount-grpc
     build:
       context: .

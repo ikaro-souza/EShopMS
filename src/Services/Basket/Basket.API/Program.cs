@@ -1,14 +1,17 @@
+using Discount.GRPC;
 using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
 var builder = WebApplication.CreateBuilder(args);
 
 var assembly = typeof(Program).Assembly;
+var databaseConnectionString = builder.Configuration.GetConnectionString("Database")!;
+var redisConnectionString = builder.Configuration.GetConnectionString("Redis")!;
+var discountGrpcUrl = builder.Configuration["GRPC:DiscountUrl"]!;
 
+// Application services
 builder.Services.AddCarter();
 builder.Services.AddValidatorsFromAssembly(assembly);
-builder.Services.AddExceptionHandler<CustomExceptionHandler>();
-
 builder.Services.AddMediatR(config =>
 {
     config.RegisterServicesFromAssembly(assembly);
@@ -16,15 +19,14 @@ builder.Services.AddMediatR(config =>
     config.AddOpenBehavior(typeof(LoggingBehavior<,>));
 });
 
-var connectionString = builder.Configuration.GetConnectionString("Database")!;
+// Data services
 builder.Services.AddMarten(config =>
     {
-        config.Connection(connectionString);
+        config.Connection(databaseConnectionString);
         config.Schema.For<ShoppingCart>().Identity(x => x.UserName);
     })
     .UseLightweightSessions();
 
-var redisConnectionString = builder.Configuration.GetConnectionString("Redis")!;
 builder.Services.AddStackExchangeRedisCache(config =>
 {
     config.Configuration = redisConnectionString;
@@ -34,9 +36,17 @@ builder.Services.AddStackExchangeRedisCache(config =>
 builder.Services.AddScoped<IBasketRepository, BasketRepository>();
 builder.Services.Decorate<IBasketRepository, CachedBasketRepository>();
 
+// GRPC services
+builder.Services.AddGrpcClient<DiscountProtoService.DiscountProtoServiceClient>(opts =>
+{
+    opts.Address = new Uri(discountGrpcUrl);
+});
+
+// Cross-cutting services
+builder.Services.AddExceptionHandler<CustomExceptionHandler>();
 
 builder.Services.AddHealthChecks()
-    .AddNpgSql(connectionString)
+    .AddNpgSql(databaseConnectionString)
     .AddRedis(redisConnectionString);
 
 var app = builder.Build();
