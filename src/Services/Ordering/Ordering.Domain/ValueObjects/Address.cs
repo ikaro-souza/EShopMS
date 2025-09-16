@@ -20,7 +20,7 @@ public record Address
 
     public string FirstName { get; }
     public string LastName { get; }
-    public string Email { get; }
+    public string? Email { get; }
     public string AddressLine { get; }
     public string Country { get; }
     public string State { get; }
@@ -29,7 +29,6 @@ public record Address
     public static Address Of(string firstName, string lastName, string email, string addressLine,
         string country, string state, string zipCode)
     {
-        ArgumentException.ThrowIfNullOrEmpty(email);
         ArgumentException.ThrowIfNullOrEmpty(addressLine);
 
         return new Address(firstName, lastName, email, addressLine, country, state, zipCode);
