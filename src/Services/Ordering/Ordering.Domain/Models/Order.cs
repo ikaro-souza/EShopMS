@@ -33,7 +33,7 @@ public class Order : Aggregate<OrderId>
         };
 
         // TODO: Add domain event
-        // order.AddDomainEvent(new OrderCreatedDomainEvent(order));
+        order.AddDomainEvent(new OrderCreatedDomainEvent(order));
 
         return order;
     }
@@ -48,7 +48,7 @@ public class Order : Aggregate<OrderId>
         Status = status;
 
         // TODO: Add domain event
-        // AddDomainEvent(new OrderUpdatedDomainEvent(this));
+        AddDomainEvent(new OrderUpdatedDomainEvent(this));
     }
 
     public void AddOrderItem(ProductId productId, int quantity, decimal price)
