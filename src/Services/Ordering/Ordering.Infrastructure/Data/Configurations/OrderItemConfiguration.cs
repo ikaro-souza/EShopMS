@@ -12,7 +12,7 @@ public class OrderItemConfiguration : IEntityTypeConfiguration<OrderItem>
             modelId => modelId.Value,
             dbId => OrderItemId.Of(dbId));
         builder.Property(entity => entity.Quantity).IsRequired();
-        builder.Property(entity => entity.Price).IsRequired();
+        builder.Property(entity => entity.Price).IsRequired().HasColumnType("decimal").HasPrecision(18, 2);
 
         builder.HasOne<Product>().WithMany().HasForeignKey(orderItem => orderItem.ProductId);
     }

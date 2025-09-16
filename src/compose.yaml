@@ -34,6 +34,17 @@
     volumes:
       - redis-data:/data
   
+  ordering-db:
+    image: mcr.microsoft.com/mssql/server
+    container_name: ordering-db
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Swn12345678
+      - MSSQL_PID=Developer
+    restart: always
+    ports:
+      - "1433:1433"
+  
   catalog-api:
     container_name: catalog-api
     build:
@@ -81,6 +92,7 @@
       - "6002:8080"
     volumes:
       - discount-db-data:/app
+
 
 volumes:
   catalog-db-data:

@@ -13,5 +13,6 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
             dbId => ProductId.Of(dbId));
 
         builder.Property(product => product.Name).IsRequired().HasMaxLength(100);
+        builder.Property(product => product.Price).IsRequired().HasColumnType("decimal").HasPrecision(18, 2);
     }
 }

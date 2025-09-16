@@ -98,10 +98,12 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
                 s => s.ToString(),
                 dbStatus => (OrderStatus)Enum.Parse(typeof(OrderStatus), dbStatus));
 
+        builder.Property(o => o.TotalPrice).IsRequired().HasColumnType("decimal").HasPrecision(18, 2);
+
         builder.HasOne<Customer>()
             .WithMany()
             .HasForeignKey(order => order.CustomerId)
             .IsRequired();
-        builder.HasMany<OrderItem>().WithOne().HasForeignKey(orderItem => orderItem.OrderId);
+        builder.HasMany(order => order.OrderItems).WithOne().HasForeignKey(orderItem => orderItem.OrderId);
     }
 }
