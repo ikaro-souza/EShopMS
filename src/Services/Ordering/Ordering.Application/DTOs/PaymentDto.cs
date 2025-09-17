@@ -6,4 +6,10 @@ public record PaymentDto(
     string ExpirationDte,
     string Cvv,
     int PaymentMethod
-);
+)
+{
+    public Payment ToPaymentValueObject()
+    {
+        return Payment.Of(CardHolder, CardNumber, ExpirationDte, Cvv, PaymentMethod);
+    }
+}

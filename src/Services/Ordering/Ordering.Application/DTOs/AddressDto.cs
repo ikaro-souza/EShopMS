@@ -8,4 +8,10 @@ public record AddressDto(
     string Country,
     string State,
     string ZipCode
-);
+)
+{
+    public Address ToAddressValueObject()
+    {
+        return Address.Of(FirstName, LastName, Email, AddressLine, Country, State, ZipCode);
+    }
+}
