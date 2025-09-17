@@ -20,7 +20,7 @@ public static class DependencyInjection
             options.AddInterceptors(serviceProvider.GetServices<ISaveChangesInterceptor>());
             options.UseSqlServer(dbConnectionString);
         });
-        // services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
+        services.AddScoped<IApplicationDbContext, ApplicationDbContext>();
 
         return services;
     }

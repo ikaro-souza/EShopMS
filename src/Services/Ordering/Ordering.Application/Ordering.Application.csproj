@@ -12,12 +12,20 @@
     </ItemGroup>
 
     <ItemGroup>
-        <Folder Include="Data\"/>
         <Folder Include="Exceptions\"/>
         <Folder Include="Extensions\"/>
-        <Folder Include="Orders\Commands\"/>
         <Folder Include="Orders\EventHandlers\"/>
         <Folder Include="Orders\Queries\"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <Reference Include="Microsoft.EntityFrameworkCore">
+            <HintPath>..\..\..\..\..\..\..\..\.nuget\packages\microsoft.entityframeworkcore\9.0.9\lib\net8.0\Microsoft.EntityFrameworkCore.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.9"/>
     </ItemGroup>
 
 </Project>
