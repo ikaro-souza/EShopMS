@@ -1,9 +1,21 @@
+using Ordering.Application.Orders.Queries.GetOrdersByCustomer;
+
 namespace Ordering.API.Endpoints;
 
-public record GetOrdersByCustomerRequest(string OrderId);
+// public record GetOrdersByCustomerRequest(Guid CustomerId);
 
-public record GetOrdersByCustomerResponse(string OrderId);
+public record GetOrdersByCustomerResponse(IEnumerable<OrderDto> Orders);
 
-public class GetOrdersByCustomer
+public class GetOrdersByCustomer : ICarterModule
 {
+    public void AddRoutes(IEndpointRouteBuilder app)
+    {
+        app.MapGet("/orders/customer/{customerId:guid}", async (Guid customerId, ISender sender) =>
+        {
+            var result = await sender.Send(new GetOrdersByCustomerQuery(customerId));
+            var response = result.Adapt<GetOrdersByCustomerResponse>();
+
+            return Results.Ok(response);
+        });
+    }
 }
