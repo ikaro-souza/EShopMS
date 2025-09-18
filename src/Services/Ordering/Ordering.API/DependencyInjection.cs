@@ -4,14 +4,14 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddApiServices(this IServiceCollection services)
     {
-        // Inject Carter
+        services.AddCarter();
 
         return services;
     }
 
     public static WebApplication UseApiServices(this WebApplication app)
     {
-        // map carter enpoints
+        // map carter endpoints
 
         return app;
     }
