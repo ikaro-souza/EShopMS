@@ -1,12 +1,13 @@
+global using Ordering.Application.Data;
 global using Ordering.Application.DTOs;
+global using Ordering.Application.Exceptions;
 global using Ordering.Domain.Enums;
 global using Ordering.Domain.Models;
+global using Ordering.Domain.ValueObjects;
 global using BuildingBlocks.Behaviors;
 global using BuildingBlocks.CQRS;
 global using BuildingBlocks.Exceptions;
-global using Ordering.Application.Data;
-global using Ordering.Application.Exceptions;
-global using Ordering.Domain.ValueObjects;
+global using BuildingBlocks.Pagination;
 global using FluentValidation;
 global using Mapster;
 global using MediatR;
