@@ -12,4 +12,9 @@ public record PaymentDto(
     {
         return Payment.Of(CardHolder, CardNumber, ExpirationDte, Cvv, PaymentMethod);
     }
+
+    public static PaymentDto From(Payment payment)
+    {
+        return payment.Adapt<PaymentDto>();
+    }
 }

@@ -9,4 +9,18 @@ public record OrderDto(
     PaymentDto Payment,
     OrderStatus Status,
     List<OrderItemDto> OrderItems
-);
+)
+{
+    public static OrderDto From(Order order)
+    {
+        return new OrderDto(order.Id.Value,
+            order.CustomerId.Value,
+            order.OrderName.Value,
+            AddressDto.From(order.ShippingAddress),
+            AddressDto.From(order.BillingAddress),
+            PaymentDto.From(order.Payment),
+            order.Status,
+            order.OrderItems.Select(OrderItemDto.From).ToList()
+        );
+    }
+}

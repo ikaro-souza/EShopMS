@@ -14,4 +14,9 @@ public record AddressDto(
     {
         return Address.Of(FirstName, LastName, Email, AddressLine, Country, State, ZipCode);
     }
+
+    public static AddressDto From(Address address)
+    {
+        return address.Adapt<AddressDto>();
+    }
 }
