@@ -11,7 +11,7 @@ public static class DependencyInjection
 
     public static WebApplication UseApiServices(this WebApplication app)
     {
-        // map carter endpoints
+        app.MapCarter();
 
         return app;
     }
