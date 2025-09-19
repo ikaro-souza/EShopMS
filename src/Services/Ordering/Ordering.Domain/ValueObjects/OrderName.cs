@@ -4,6 +4,10 @@ public record OrderName
 {
     private const int DefaultLength = 5;
 
+    private OrderName()
+    {
+    }
+
     private OrderName(string value)
     {
         Value = value;

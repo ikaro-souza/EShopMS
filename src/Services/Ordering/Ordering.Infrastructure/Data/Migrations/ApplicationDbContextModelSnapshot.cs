@@ -156,7 +156,7 @@ namespace Ordering.Infrastructure.Data.Migrations
                                 .HasMaxLength(3)
                                 .HasColumnType("nvarchar(3)");
 
-                            b1.Property<string>("ExpirationDte")
+                            b1.Property<string>("ExpirationDate")
                                 .IsRequired()
                                 .HasMaxLength(10)
                                 .HasColumnType("nvarchar(10)");

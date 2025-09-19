@@ -6,16 +6,25 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
 {
     public void Configure(EntityTypeBuilder<Order> builder)
     {
-        builder.HasKey(entity => entity.Id);
+        builder.HasKey(o => o.Id);
 
-        builder.Property(entity => entity.Id).HasConversion(
-            modelId => modelId.Value,
+        builder.Property(o => o.Id).HasConversion(
+            orderId => orderId.Value,
             dbId => OrderId.Of(dbId));
 
+        builder.HasOne<Customer>()
+            .WithMany()
+            .HasForeignKey(o => o.CustomerId)
+            .IsRequired();
+
+        builder.HasMany(o => o.OrderItems)
+            .WithOne()
+            .HasForeignKey(oi => oi.OrderId);
+
         builder.ComplexProperty(
-            order => order.OrderName, nameBuilder =>
+            o => o.OrderName, nameBuilder =>
             {
-                nameBuilder.Property(orderName => orderName.Value)
+                nameBuilder.Property(n => n.Value)
                     .HasColumnName(nameof(Order.OrderName))
                     .HasMaxLength(100)
                     .IsRequired();
@@ -27,18 +36,24 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
                 addressBuilder.Property(a => a.FirstName)
                     .HasMaxLength(50)
                     .IsRequired();
+
                 addressBuilder.Property(a => a.LastName)
                     .HasMaxLength(50)
                     .IsRequired();
+
                 addressBuilder.Property(a => a.Email)
                     .HasMaxLength(50);
+
                 addressBuilder.Property(a => a.AddressLine)
                     .HasMaxLength(180)
                     .IsRequired();
+
                 addressBuilder.Property(a => a.Country)
                     .HasMaxLength(50);
+
                 addressBuilder.Property(a => a.State)
                     .HasMaxLength(50);
+
                 addressBuilder.Property(a => a.ZipCode)
                     .HasMaxLength(5)
                     .IsRequired();
@@ -83,7 +98,7 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
                     .HasMaxLength(24)
                     .IsRequired();
 
-                paymentBuilder.Property(p => p.ExpirationDte)
+                paymentBuilder.Property(p => p.ExpirationDate)
                     .HasMaxLength(10);
 
                 paymentBuilder.Property(p => p.Cvv)
@@ -98,12 +113,7 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
                 s => s.ToString(),
                 dbStatus => (OrderStatus)Enum.Parse(typeof(OrderStatus), dbStatus));
 
-        builder.Property(o => o.TotalPrice).IsRequired().HasColumnType("decimal").HasPrecision(18, 2);
-
-        builder.HasOne<Customer>()
-            .WithMany()
-            .HasForeignKey(order => order.CustomerId)
-            .IsRequired();
-        builder.HasMany(order => order.OrderItems).WithOne().HasForeignKey(orderItem => orderItem.OrderId);
+        builder.Property(o => o.TotalPrice);
+        ;
     }
 }

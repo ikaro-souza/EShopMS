@@ -4,6 +4,7 @@ public record OrderItemDto(Guid OrderId, Guid ProductId, int Quantity, decimal P
 {
     public static OrderItemDto From(OrderItem orderItem)
     {
-        return orderItem.Adapt<OrderItemDto>();
+        return new OrderItemDto(orderItem.OrderId.Value, orderItem.ProductId.Value, orderItem.Quantity,
+            orderItem.Price);
     }
 }

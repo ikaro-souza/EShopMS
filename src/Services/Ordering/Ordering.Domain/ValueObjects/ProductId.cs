@@ -2,6 +2,10 @@ namespace Ordering.Domain.ValueObjects;
 
 public record ProductId
 {
+    protected ProductId()
+    {
+    }
+
     private ProductId(Guid value)
     {
         Value = value;
