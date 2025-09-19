@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Catalog", "Catalog", "{457F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalogAPI", "Services\Catalog\CatalogAPI\CatalogAPI.csproj", "{045C3383-2B8B-4CD1-9576-A104CD76B4F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingBlocks", "BuildingBlocks\BuildingBlocks.csproj", "{E2197807-C3B8-4161-BB77-09E1DA691DB1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingBlocks", "BuildingBlocks\BuildingBlocks\BuildingBlocks.csproj", "{E2197807-C3B8-4161-BB77-09E1DA691DB1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{AA0D5302-90B4-44EA-8D9B-5FA8319C6E57}"
 	ProjectSection(SolutionItems) = preProject
@@ -34,6 +34,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.Application", "Ser
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ordering.Infrastructure", "Services\Ordering\Ordering.Infrastructure\Ordering.Infrastructure.csproj", "{1A0D02F9-A275-4D9E-A683-74D237677ABE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{E45DE8A4-2F28-41D8-B899-564746CB383A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildingBlocks.Messaging", "BuildingBlocks\BuildingBlocks.Messaging\BuildingBlocks.Messaging.csproj", "{FEEDA657-5FCC-4BCB-8BD2-F82EFE89DB6A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,6 +58,8 @@ Global
 		{B832327C-65E0-4477-A21C-046FE59F82F4} = {DD8D8C8D-70BD-4E02-AEC7-81B596701FE1}
 		{8B56702B-088B-4421-9E38-55CF4DEC5D94} = {DD8D8C8D-70BD-4E02-AEC7-81B596701FE1}
 		{1A0D02F9-A275-4D9E-A683-74D237677ABE} = {DD8D8C8D-70BD-4E02-AEC7-81B596701FE1}
+		{E2197807-C3B8-4161-BB77-09E1DA691DB1} = {E45DE8A4-2F28-41D8-B899-564746CB383A}
+		{FEEDA657-5FCC-4BCB-8BD2-F82EFE89DB6A} = {E45DE8A4-2F28-41D8-B899-564746CB383A}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{045C3383-2B8B-4CD1-9576-A104CD76B4F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -88,5 +94,9 @@ Global
 		{1A0D02F9-A275-4D9E-A683-74D237677ABE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A0D02F9-A275-4D9E-A683-74D237677ABE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A0D02F9-A275-4D9E-A683-74D237677ABE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FEEDA657-5FCC-4BCB-8BD2-F82EFE89DB6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FEEDA657-5FCC-4BCB-8BD2-F82EFE89DB6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FEEDA657-5FCC-4BCB-8BD2-F82EFE89DB6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FEEDA657-5FCC-4BCB-8BD2-F82EFE89DB6A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
