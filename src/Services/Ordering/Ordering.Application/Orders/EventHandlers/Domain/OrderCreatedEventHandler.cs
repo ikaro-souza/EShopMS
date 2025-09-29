@@ -2,6 +2,7 @@ namespace Ordering.Application.Orders.EventHandlers.Domain;
 
 public class OrderCreatedEventHandler(
     IPublishEndpoint publishEndpoint,
+    IFeatureManager featureManager,
     ILogger<OrderCreatedEventHandler> logger)
     : INotificationHandler<OrderCreatedDomainEvent>
 {
@@ -9,8 +10,9 @@ public class OrderCreatedEventHandler(
     {
         logger.LogInformation("Domain event handled: {DomainEvent}", domainEvent.GetType().Name);
 
-        var integrationEvent = OrderDto.From(domainEvent.order);
+        if (!await featureManager.IsEnabledAsync("OrderFulfillment")) return;
 
+        var integrationEvent = OrderDto.From(domainEvent.order);
         await publishEndpoint.Publish(integrationEvent, cancellationToken);
     }
 }

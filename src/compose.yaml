@@ -25,15 +25,6 @@
     volumes:
       - basket-db-data:/var/lib/postgresql/data
   
-  distributed-cache:
-    image: redis
-    container_name: distributed-cache
-    restart: always
-    ports:
-      - "6379:6379"
-    volumes:
-      - redis-data:/data
-  
   ordering-db:
     image: mcr.microsoft.com/mssql/server
     container_name: ordering-db
@@ -44,6 +35,26 @@
     restart: always
     ports:
       - "1433:1433"
+
+  distributed-cache:
+    image: redis
+    container_name: distributed-cache
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+  
+  message-broker:
+    image: rabbitmq:management
+    container_name: message-broker
+    hostname: ecommerce-mq
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
   
   catalog-api:
     container_name: catalog-api
@@ -71,12 +82,15 @@
       - ConnectionStrings__Database=Host=basket-db;Port=5432;Database=BasketDb;Username=postgres;Password=postgres
       - ConnectionStrings__Redis=distributed-cache:6379
       - GRPC__DiscountUrl=http://discount-grpc:8080
+      - MessageBroker__Host=amqp://ecommerce-mq:5672
+
     ports:
       - "6001:8080"
     depends_on:
       - basket-db
       - distributed-cache
       - discount-grpc
+      - message-broker
   
   discount-grpc:
     image: discount-grpc

@@ -15,3 +15,4 @@ global using Microsoft.EntityFrameworkCore;
 global using Microsoft.Extensions.Logging;
 global using MassTransit;
 global using Ordering.Domain.Events;
+global using Microsoft.FeatureManagement;
