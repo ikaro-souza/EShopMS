@@ -12,3 +12,6 @@ global using FluentValidation;
 global using Mapster;
 global using MediatR;
 global using Microsoft.EntityFrameworkCore;
+global using Microsoft.Extensions.Logging;
+global using MassTransit;
+global using Ordering.Domain.Events;
