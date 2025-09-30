@@ -83,7 +83,6 @@
       - ConnectionStrings__Redis=distributed-cache:6379
       - GRPC__DiscountUrl=http://discount-grpc:8080
       - MessageBroker__Host=amqp://ecommerce-mq:5672
-
     ports:
       - "6001:8080"
     depends_on:
@@ -106,6 +105,25 @@
       - "6002:8080"
     volumes:
       - discount-db-data:/app
+  
+  ordering-api:
+    image: ordering-api
+    container_name: ordering-api
+    build:
+      context: .
+      dockerfile: Services/Ordering/Ordering.API/Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ConnectionStrings__Database=Server=ordering-db;Database=OrderingDb;User Id=sa;Password=Swn12345678;Encrypt=False;TrustServerCertificate=True;
+      - MessageBroker__Host=amqp://ecommerce-mq:5672
+      - MessageBroker__UserName=guest
+      - MessageBroker__Password=guest
+      - FeatureManagement__OrderFulfillment=false
+    ports:
+      - "6003:8080"
+    depends_on:
+      - ordering-db
 
 
 volumes:
