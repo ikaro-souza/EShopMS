@@ -15,6 +15,11 @@
 
 ### [Mediator Pattern](https://refactoring.guru/design-patterns/mediator)
 
+The Mediator Pattern decouples components by providing a common interface they can communicate through, instead of
+directly communicating with one another.
+This pattern exemplifies the Dependency Inversion principle, because components depend on the mediator interface (an
+abstraction) rather than directly on each other, applying DIP even between peers.
+
 ### [Dual write Problem](https://www.confluent.io/blog/dual-write-problem)
 
 - Description: The Dual Write Problem is an intrinsic problem that distributed system (such as microservices) face.
@@ -48,9 +53,3 @@ differ slightly.
   state of one service
   to all the others that need to know about it via a message broker like RabbitMQ.
 
-### Mediator Pattern (With MediatR library)
-
-The Mediator Pattern decouples components by providing a common interface they can communicate through, instead of
-directly communicating with one another.
-This pattern exemplifies the Dependency Inversion principle, because components depend on the mediator interface (an
-abstraction) rather than directly on each other, applying DIP even between peers.
