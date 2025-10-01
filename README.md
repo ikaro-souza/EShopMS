@@ -81,3 +81,9 @@ The reasons for this segregation can be summarized into two:
 Another benefit of creating multiple gateways, is that each one can service a specific client better, by focusing
 on the needs of that client. That can also be the reason for splitting gateways, which will come with the benefits
 listed above.
+
+### Reverse Proxy
+
+Is an application that runs on server "in front" of the backend server(s) to hide them from clients.
+It is called "reverse" because traditionally, a proxy in this context of client/server communication refers to an
+application that hides the client from the server, reverse proxies work the other way around.
