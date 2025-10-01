@@ -32,7 +32,7 @@ abstraction) rather than directly on each other, applying DIP even between peers
   process in the service is responsible for taking the stored messages and deleting them as they're sent to the message
   broker.
 
-### [Saga Pattern](https://microservices.io/patterns/data/saga.html)
+### [Saga Pattern](https://microservices.io/patterns/data/saga.html):
 
 The saga pattern aims to provide data consistency across multiple services, by "chaining" a sequence of local
 transactions.
@@ -53,3 +53,31 @@ differ slightly.
   state of one service
   to all the others that need to know about it via a message broker like RabbitMQ.
 
+### Gateway Routing Pattern:
+
+In this pattern, the backend only exposes a single API, no matter how many services it has.
+This is useful to simplify the integration between clients and the multiple services and helps decouple them even
+further, for example, you can rewrite the entire auth service and as long as the API stays the same, nothing will change
+for the client.
+
+### API Gateway Pattern
+
+The API Gateway is the single API that clients use to communicate with different services.
+With an API Gateway you can aggregate calls to multiple services into a single endpoint, allowing complex operations to
+handled while keeping the communication with client as simple as sending a single HTTP request and waiting for a
+response.
+The API Gateway is also responsible for cross-cutting concerns such as SSL termination, Caching, Rate Limiting, etc.
+
+### Backend for Frontend (BFF)
+
+In the context of API Gateways, this pattern aims to separate a single API Gateway into multiple smaller ones.
+The reasons for this segregation can be summarized into two:
+
+- To provide better resilience: A single API Gateway is a point of failure that effectively takes down the entire
+  backend.
+- Not to have a God Class: By having a single API Gateway, specially if it aggregates service calls, it can
+  fall into the same problem of God service classes in traditional Layer Architecture APIs.
+
+Another benefit of creating multiple gateways, is that each one can service a specific client better, by focusing
+on the needs of that client. That can also be the reason for splitting gateways, which will come with the benefits
+listed above.
